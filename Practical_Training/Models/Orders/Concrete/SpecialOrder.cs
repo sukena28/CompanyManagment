@@ -3,7 +3,7 @@ using Practical_Training.Models.Virstual;
 
 namespace Practical_Training.Models.Orders.Concrete
 {
-    public class SpecialOrder : OrderBase, PrintableOrder, IHasGiftOrder
+    public class SpecialOrder : OrderBase, IPrintableOrder, IHasGiftOrder
     {
         public RecurringOrder GiftOrder { get; set; }
 

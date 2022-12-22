@@ -1,46 +1,36 @@
 ﻿using Practical_Training.Models.Orders;
 using Practical_Training.Models.Orders.Concrete;
+using Practical_Training.Repositories.Base;
 
 namespace Practical_Training.Repositories
 {
-    public class OrderRepository: IOrderRepository
+    public class OrderRepository : BaseRepository<OrderBase>, IOrderRepository
     {
-        private static IEnumerable<OrderBase> _orders;
-        public OrderRepository()
+        private static List<OrderBase> _orders;
+        public OrderRepository() : base(GetEntities())
         {
-            Seed();
         }
-        public IEnumerable<OrderBase> GetAll()
+        private static List<OrderBase> GetEntities()
         {
-            return _orders;
+            if (_orders != null)
+                return _orders;
+
+            return Seed();
         }
-        public OrderBase GetById(int id)
+        private static List<OrderBase> Seed()
         {
-            var order = _orders.FirstOrDefault(x => x.Id == id);
+            var basicOrder = new BasicOrder() { Id = 1, Name = "Basic Order", Price = 20 };
+            var recurringOrder = new RecurringOrder() { Id = 1, Name = "Recurring Order", Price = 20 };
+            var specialOrder = new SpecialOrder() { Id = 2, Name = "Special Order", Price = 50, GiftOrder = recurringOrder };
 
-            if (order == null)
-                throw new Exception($"The Order of id {id} is not exists");
-
-            return order;
-        }
-        private void Seed()
-        {
-            if (_orders == null)
-            {
-
-                var basicOrder = new BasicOrder() { Id = 1, Name = "Basic Order", Price = 20 };
-                var recurringOrder = new RecurringOrder() { Id = 1, Name = "Recurring Order", Price = 20 };
-                var specialOrder = new SpecialOrder() { Id = 2, Name = "Special Order", Price = 50, GiftOrder = recurringOrder };
-
-                _orders = new List<OrderBase>()
+            _orders = new List<OrderBase>()
             {
                 basicOrder,
                 recurringOrder,
                 specialOrder
             };
-            }
 
-
+            return _orders;
         }
     }
 }

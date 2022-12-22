@@ -1,8 +1,9 @@
+using Practical_Training.Models.Share;
+
 namespace Practical_Training.Models.Orders
 {
-    public abstract class OrderBase
+    public abstract class OrderBase: BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
 

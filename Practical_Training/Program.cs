@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Hosting;
+using Practical_Training.Common.Configuration;
 using Practical_Training.Configuration;
 using Serilog;
 
@@ -25,6 +27,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 

@@ -2,7 +2,7 @@
 
 namespace Practical_Training.Models.Orders.Concrete
 {
-    public class RecurringOrder : OrderBase, PrintableOrder
+    public class RecurringOrder : OrderBase, IPrintableOrder
     {
 
         public override string GetOrderInformation()
